@@ -1,15 +1,24 @@
 package com.training.quarkus.service;
 
+import com.training.quarkus.annotation.AuditInfo;
 import com.training.quarkus.model.CallLog;
 import com.training.quarkus.model.Caller;
 import com.training.quarkus.repository.CallLogRepository;
 
+import javax.enterprise.context.ApplicationScoped;
+
+@ApplicationScoped
 public class CallLogService {
 
-    private static CallLogService instance = null;
+    private final CallLogRepository callLogRepository;
 
+    public CallLogService(CallLogRepository callLogRepository) {
+        this.callLogRepository = callLogRepository;
+    }
+
+    @AuditInfo(operation = "GET CALL LOG", resourceId = "phone")
     public CallLog getCallLogByPhone(final String phone) {
-        return CallLogRepository.getInstance().getCallLogByPhone(phone);
+        return callLogRepository.getCallLogByPhone(phone);
     }
 
     public void printCallInformation(final Caller caller, final CallLog callLog) {
@@ -20,12 +29,5 @@ public class CallLogService {
             System.out.println("Caller: " + caller);
             System.out.println("Call Log: " + callLog + "\n");
         }
-    }
-
-    public static CallLogService getInstance() {
-        if (instance == null) {
-            instance = new CallLogService();
-        }
-        return instance;
     }
 }

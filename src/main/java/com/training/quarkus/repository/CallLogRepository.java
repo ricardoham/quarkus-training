@@ -2,17 +2,17 @@ package com.training.quarkus.repository;
 
 import com.training.quarkus.model.CallLog;
 
+import javax.enterprise.context.ApplicationScoped;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.stream.IntStream;
 
+@ApplicationScoped
 public class CallLogRepository {
 
-    private static CallLogRepository instance = null;
-
-    private Map<String, CallLog> callLogs = new HashMap<>();
+    private final Map<String, CallLog> callLogs = new HashMap<>();
 
     public CallLogRepository() {
         createCallLogs();
@@ -36,12 +36,5 @@ public class CallLogRepository {
                     this.callLogs.put(phone, callLog);
                 }
         );
-    }
-
-    public static CallLogRepository getInstance() {
-        if (instance == null) {
-            instance = new CallLogRepository();
-        }
-        return instance;
     }
 }

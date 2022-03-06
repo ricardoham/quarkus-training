@@ -2,16 +2,16 @@ package com.training.quarkus.repository;
 
 import com.training.quarkus.model.Caller;
 
+import javax.enterprise.context.ApplicationScoped;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.IntStream;
 
+@ApplicationScoped
 public class CallerRepository {
 
-    private static CallerRepository instance = null;
-
-    private Map<String, Caller> callers = new HashMap<>();
+    private final Map<String, Caller> callers = new HashMap<>();
 
     public CallerRepository() {
         createCallers();
@@ -32,12 +32,5 @@ public class CallerRepository {
                     this.callers.put(phone, caller);
                 }
         );
-    }
-
-    public static CallerRepository getInstance() {
-        if (instance == null) {
-            instance = new CallerRepository();
-        }
-        return instance;
     }
 }
