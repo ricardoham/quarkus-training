@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 
 public class CallLogRepository {
 
-    private static CallLogRepository instance = null;
+    private static CallLogRepository instance = new CallLogRepository();
 
     private Map<String, CallLog> callLogs = new HashMap<>();
 
@@ -39,9 +39,6 @@ public class CallLogRepository {
     }
 
     public static CallLogRepository getInstance() {
-        if (instance == null) {
-            instance = new CallLogRepository();
-        }
         return instance;
     }
 }
