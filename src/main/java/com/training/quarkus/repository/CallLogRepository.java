@@ -8,9 +8,8 @@ import java.util.Map;
 import java.util.Random;
 import java.util.stream.IntStream;
 
+// FIXME
 public class CallLogRepository {
-
-    private static CallLogRepository instance = null;
 
     private Map<String, CallLog> callLogs = new HashMap<>();
 
@@ -36,12 +35,5 @@ public class CallLogRepository {
                     this.callLogs.put(phone, callLog);
                 }
         );
-    }
-
-    public static CallLogRepository getInstance() {
-        if (instance == null) {
-            instance = new CallLogRepository();
-        }
-        return instance;
     }
 }
